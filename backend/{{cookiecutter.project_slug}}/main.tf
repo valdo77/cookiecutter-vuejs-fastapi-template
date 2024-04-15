@@ -66,7 +66,13 @@ resource "google_firestore_document" "user_doc_exemple" {
   database    = google_firestore_database.database[0].name
   collection  = "Users"
   document_id = "jean.dupont@gmail.com"
-  fields      = "{\"first_name\": {\"stringValue\": \"Jean\"}, \"last_name\": {\"stringValue\": \"Dupont\"}, \"email\": {\"stringValue\": \"jean.dupont@gmail.com\"}}"
+  fields = jsonencode({
+    "created_at" = { timestampValue = timestamp() }, // Replace with actual creation timestamp
+    "updated_at" = { timestampValue = timestamp() }, // Replace with actual update timestamp
+    "first_name" = { stringValue = "Jean" },
+    "last_name"  = { stringValue = "Dupont" },
+    "email"      = { stringValue = "jean.dupont@gmail.com" },
+  })
 }
 
 resource "google_artifact_registry_repository" "cookiecutter-repo" {
