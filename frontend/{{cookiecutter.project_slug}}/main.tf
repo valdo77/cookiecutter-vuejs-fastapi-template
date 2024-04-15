@@ -80,6 +80,16 @@ resource "google_secret_manager_secret_version" "secret-version" {
   secret = google_secret_manager_secret.frontend_secret.id
 
   secret_data = <<EOT
-VITE_BASE_URL=https://{{ cookiecutter.project_slug.replace('_', '-') }}-"${data.google_project.current.number}.{{cookiecutter.gcloud_region}}.run.app/api"
+VITE_BASE_URL="https://{{ cookiecutter.project_slug.replace('_', '-') }}-${data.google_project.current.number}.{{cookiecutter.gcloud_region}}.run.app/api"
   EOT
+}
+
+# Cloud Build Trigger exemple
+resource "google_cloudbuild_trigger" "cloudbuild_trigger" {
+  name = "{{ cookiecutter.project_slug.replace('_', '-') }}"
+  trigger_template {
+    branch_name = "main"
+    repo_name   = "{{ cookiecutter.repository_name }}"
+  }
+  filename = ".cloudbuild/cloudbuild.yaml"
 }

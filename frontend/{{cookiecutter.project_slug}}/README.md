@@ -65,7 +65,7 @@ npm run type-check
 
 ## Deployment
 
-:warning: Everything under this section assumes you choosed 'yes' to "as_container" question :warning:
+:warning: Everything under this section assumes you specified a repository to push to, and choosed 'yes' to "as_container" question :warning:
 
 ### Initialisation
 
@@ -99,9 +99,7 @@ This will run linting for every Pull Request on develop, uat and main branches
 
 *Requirements*:
 
-- Create a Cloud Build trigger from GCP:
-  - Specify the cloudbuild.yaml path
-  - Give repository access to Cloud Build
+- From the trigger created by Terraform, give Github repository access to Cloud Build
 
 - Copy .env into the secret '{{ cookiecutter.project_slug.replace('_', '-') }}'' to ensure Cloud Build will have the correct environement.
 

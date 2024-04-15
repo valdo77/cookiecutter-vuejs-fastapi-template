@@ -138,3 +138,12 @@ resource "google_secret_manager_secret" "backend_secret" {
   }
 }
 
+# Cloud Build Trigger exemple
+resource "google_cloudbuild_trigger" "cloudbuild_trigger" {
+  name = "{{ cookiecutter.project_slug.replace('_', '-') }}"
+  trigger_template {
+    branch_name = "main"
+    repo_name   = "{{ cookiecutter.repository_name }}"
+  }
+  filename = ".cloudbuild/cloudbuild.yaml"
+}
