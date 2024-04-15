@@ -65,7 +65,7 @@ npm run type-check
 
 ## Deployment
 
-:warning: Everything under this section assumes you specified a repository to push to, and choosed 'yes' to "as_container" question :warning:
+:warning: Everything under this section assumes you specified a repository to push to, and choosed 'yes' to "as_container" question. Otherwise update the main.tf according yo your needs before running  :warning:
 
 ### Initialisation
 

@@ -13,6 +13,7 @@
 - [FastApi](https://fastapi.tiangolo.com/)
 - [SQLModel](https://sqlmodel.tiangolo.com/)
 - [SQLAlchemy 2](https://docs.sqlalchemy.org/en/20/)
+- [Firestore](https://firebase.google.com/docs/firestore)
 
 ## Project Setup
 
@@ -23,10 +24,11 @@
   ```sh
   poetry config virtualenvs.in-project true
   poetry env use 3.11
+  poetry shell
   poetry install
   ```
 
-- Create and run required databases
+- (Postgres only) Create and run required databases
 
   ```bash
   docker compose up -d
@@ -63,7 +65,7 @@ poetry run pytest --cov=app --cov-report=term     # Uses SQLALCHEMY_DATABASE_URI
 
 ## Deployment
 
-:warning: Everything under this section assumes you specified a repository to push to, and choosed 'yes' to "as_container" question :warning:
+:warning: Everything under this section assumes you specified a repository to push to, and choosed 'yes' to "as_container" question. Otherwise update the main.tf according yo your needs before running  :warning:
 
 ### Initialisation
 
@@ -87,9 +89,7 @@ terraform apply
 
 ```
 
-Feel free to update it according to your needs
-
-### Migrations
+### Migrations (Postgres only)
 
 Run migrations into the instance with Cloud SQL Proxy
 
