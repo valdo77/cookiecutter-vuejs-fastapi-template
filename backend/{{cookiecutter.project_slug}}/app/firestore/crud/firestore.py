@@ -31,6 +31,22 @@ class Firestore(metaclass=Singleton):
 
         return Firestore._get_doc_as_dict(doc)
 
+    def get_by_key(
+        self, collection_name: str, key: str, value: str, as_dict=True
+    ) -> firestore.DocumentReference | dict:
+        doc_list = (
+            self.client.collection(collection_name)
+            .where(filter=firestore.FieldFilter(key, "==", value))
+            .get()
+        )
+        if not as_dict:
+            return doc_list
+
+        dict_list = []
+        for document in doc_list:
+            dict_list.append(Firestore._get_doc_as_dict(document))
+            return dict_list
+
     def add_document(self, collection_name: str, data: dict) -> firestore.DocumentReference:
         return self.client.collection(collection_name).add(data)
 
